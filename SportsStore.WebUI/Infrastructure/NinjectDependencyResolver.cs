@@ -6,7 +6,6 @@ using SportsStore.Domain.Entities;
 using SportsStore.WebUI.Infrastructure.Abstract;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Web.Mvc;
 
 namespace SportsStore.WebUI.Infrastructure
@@ -38,13 +37,12 @@ new Product { Name = "Running shoes", Price = 95 }
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
 
 
-            EmailSettings emailSettings = new EmailSettings
-            {
-                WriteAsFile = bool.Parse(ConfigurationManager
-.AppSettings["Email.WriteAsFile"] ?? "false")
-            };
-            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
-            .WithConstructorArgument("settings", emailSettings);
+//            EmailSettings emailSettings = new EmailSettings
+//            {
+////                WriteAsFile = bool.Parse(ConfigurationManager
+//.AppSettings["Email.WriteAsFile"] ?? "false")
+//            };
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>();
 
             kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }

@@ -8,15 +8,15 @@ namespace SportsStore.Domain.Concrete
 {
     public class EmailSettings
     {
-        public string MailToAddress = "orders@example.com";
-        public string MailFromAddress = "sportsstore@example.com";
+        public string MailToAddress = "sidorela4334@gmail.com";
+        public string MailFromAddress = "sidorelaveiz@gmail.com";
         public bool UseSsl = true;
-        public string Username = "MySmtpUsername";
-        public string Password = "MySmtpPassword";
-        public string ServerName = "smtp.example.com";
+        public string Username = "sidorela4334@gmail.com";
+        public string Password = "sido1234";
+        public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
-        public bool WriteAsFile = false;
-        public string FileLocation = @"c:\sports_store_emails";
+        //public bool WriteAsFile = false;
+        //public string FileLocation = @"c:\sports_store_emails";
     }
     public class EmailOrderProcessor : IOrderProcessor
     {
@@ -36,13 +36,13 @@ namespace SportsStore.Domain.Concrete
                 smtpClient.Credentials
                 = new NetworkCredential(emailSettings.Username,
                 emailSettings.Password);
-                if (emailSettings.WriteAsFile)
-                {
-                    smtpClient.DeliveryMethod
-                    = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
-                    smtpClient.EnableSsl = false;
-                }
+                //if (emailSettings.WriteAsFile)
+                //{
+                //    smtpClient.DeliveryMethod
+                //    = SmtpDeliveryMethod.SpecifiedPickupDirectory;
+                //    smtpClient.PickupDirectoryLocation = emailSettings.FileLocation;
+                //    smtpClient.EnableSsl = false;
+                //}
                 StringBuilder body = new StringBuilder()
                 .AppendLine("A new order has been submitted")
                 .AppendLine("---")
@@ -73,10 +73,10 @@ namespace SportsStore.Domain.Concrete
                 emailSettings.MailToAddress, // To
                 "New order submitted!", // Subject
                 body.ToString()); // Body
-                if (emailSettings.WriteAsFile)
-                {
-                    mailMessage.BodyEncoding = Encoding.ASCII;
-                }
+                //if (emailSettings.WriteAsFile)
+                //{
+                //    mailMessage.BodyEncoding = Encoding.ASCII;
+                //}
                 smtpClient.Send(mailMessage);
             }
         }
